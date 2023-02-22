@@ -13,7 +13,7 @@ db.once('connected', () => console.log('Connected to Database!'))
 
 app.use(express.json())
 
-const userRouter = require('./routes/users')
-app.use('/users', userRouter)
+const playerRouter = require('./routes/players')
+app.use('/players', playerRouter)
 
 app.listen(28017, () => console.log('Server has been Started!'))
