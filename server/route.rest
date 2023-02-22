@@ -1,0 +1,28 @@
+GET http://localhost:28017/Users/
+
+###
+
+GET http://localhost:28017/Users/63f67c4add67f39d35f347f5
+
+###
+
+POST http://localhost:28017/Users/
+Content-Type: application/json
+
+{
+    "name": "Amara Ouattara",
+    "email": "ouattara.a@northeadwadaa.edu"
+}
+
+### 
+
+DELETE http://localhost:28017/Users/63ed20731cae772708d0fa81
+
+###
+
+PATCH http://localhost:28017/Users/63ec756360fc66fed5a506d6
+Content-Type: application/json
+
+{
+    "name": "Green Blue"
+}
