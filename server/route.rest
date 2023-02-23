@@ -6,7 +6,7 @@ GET http://localhost:28017/Players/63f6a040a04e2f0dbbc9fa9e
 
 ###
 
-GET http://localhost:28017/Players/name/Amara
+GET http://localhost:28017/Players/name/Riyad%20Mahrez
 
 ###
 
