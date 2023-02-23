@@ -6,11 +6,15 @@ GET http://localhost:28017/Players/63f6a040a04e2f0dbbc9fa9e
 
 ###
 
+GET http://localhost:28017/Players/name/Amara
+
+###
+
 POST http://localhost:28017/Players
 Content-Type: application/json
 
 {
-    "full_name": "Amara Ouattara",
+    "full_name": "Amara",
     "age": 10,
     "position": "Midfielder",
     "current_club": "Liverpool FC",
@@ -19,7 +23,7 @@ Content-Type: application/json
 
 ### 
 
-DELETE http://localhost:28017/Players/63f6a040a04e2f0dbbc9fa9e
+DELETE http://localhost:28017/Players/remove/Amara
 
 ###
 

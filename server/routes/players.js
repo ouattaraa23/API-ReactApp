@@ -18,6 +18,11 @@ router.get('/:id', getPlayer,(req, res) => {
     res.json(res.player)
 })
 
+// Getting a UserByName
+router.get('/name/:full_name', getPlayerName,(req, res) => {
+    res.json(res.player)
+})
+
 // Creating a User
 router.post('/', async (req, res) => {
     const player = new Player ({
@@ -68,8 +73,19 @@ router.patch('/:id', getPlayer, async (req, res) => {
     }
 })
 
-// Deleting a User
+// Deleting a User by ID
 router.delete('/:id', getPlayer, async (req, res) => {
+    try {
+        await res.player.remove()
+        res.json({message: "Deleted Player"})
+    } catch (err) {
+        res.status(500).json({ message: err.message})
+    }
+})
+
+// Deleting a User by Name
+// Deleting a User
+router.delete('/remove/:full_name', getPlayerName, async (req, res) => {
     try {
         await res.player.remove()
         res.json({message: "Deleted Player"})
@@ -92,6 +108,22 @@ let player
             return res.status(404).json({ message: "Cannot find User" })
         }
         return res.status(500).json({message: err.message})
+    }
+
+    res.player = player
+    next()
+}
+
+async function getPlayerName(req, res, next) {
+    let player
+
+    try {
+        player = await Player.findOne({ full_name: req.params.full_name})
+    } catch (err) {
+        if (player == null) {
+            return res.status(404).json({ message: 'Cannot find Player'})
+        }
+        return res.status(500).json({ message: err.message})
     }
 
     res.player = player
