@@ -1,8 +1,8 @@
-GET http://localhost:28017/Players/
+GET http://localhost:28017/Players/all
 
 ###
 
-GET http://localhost:28017/Players/63f6a040a04e2f0dbbc9fa9e
+GET http://localhost:28017/Players/63f7a7913a57f2485be222a9
 
 ###
 
@@ -33,3 +33,22 @@ Content-Type: application/json
 {
     "full_name": "Green Blue"
 }
+
+###
+
+GET http://localhost:28017/Users/users/
+
+###
+
+POST http://localhost:28017/Users/
+Content-Type: application/json
+
+{
+    "username": "ouattaraa",
+    "email": "ouattara.a@northeastern.edu",
+    "password": "Manman1234"
+}
+
+###
+
+GET http://localhost:28017/Users/user/ouattaraa

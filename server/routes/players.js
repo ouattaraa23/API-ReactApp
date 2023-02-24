@@ -3,7 +3,7 @@ const router = express.Router()
 const Player = require('../models/player')
 
 // Getting all Users
-router.get('/', async (req, res) => {
+router.get('/all/', async (req, res) => {
     try {
         const players = await Player.find()
         res.json(players)

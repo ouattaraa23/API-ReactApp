@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './Login.css';
 
 function Login() {
@@ -18,10 +19,13 @@ function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Pass this information to a RestAPI
-   // postUser();
+    // Check this information in the RestAPI
     navigate("/home");
     console.log(`Submitted username: ${username}, password: ${password}`);
+  };
+
+  const handleClick = () => {
+    navigate("/register");
   };
 
   // async function postUser(e) {
@@ -41,18 +45,15 @@ function Login() {
     <div>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <label>
-          Username:
+        <label>Username:</label>
           <input type="text" value={username} onChange={handleUsernameChange} />
-        </label>
-        <br />
-        <label>
-          Password:
+        <label>Password:</label>
           <input type="password" value={password} onChange={handlePasswordChange} />
-        </label>
-        <br />
         <button type="submit">Log In</button>
       </form>
+      <div>
+        <button onClick={handleClick}>Register</button>
+      </div>
     </div>
   );
 }
