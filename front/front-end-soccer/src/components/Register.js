@@ -13,7 +13,7 @@ function Register() {
       })
 
     const [errors, setErrors] = useState({})
-    const [valid, setValid] = useState(true)
+    const [valid, setValid] = useState(false)
 
   const handleChange = (e) => {
     setValues({...values, [e.target.name]: e.target.value})
@@ -31,7 +31,7 @@ function Register() {
         try{
         postUser(event);
         } catch(err) {
-            setValid(false);
+          setValid(true);
         }
     }
   };
@@ -49,12 +49,13 @@ function Register() {
         email,
         password
       })
-      navigate("/");
+      navigate("/login");
       console.log(`Submitted username: ${values.username}, email: ${values.email}, password: ${values.password}`);
     } catch(err) {
-      console.log(err.message)
+      setValid(true);
+      console.log(err.message);
     }
-  }
+  };
 
   return (
     <div>

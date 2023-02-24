@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
 
+
 // Getting all Users
 router.get('/users/', async (req, res) => {
     try {
@@ -15,13 +16,7 @@ router.get('/users/', async (req, res) => {
 
 // Getting a User By Username
 router.get('/user/:username', getUsername, async (req, res) => {
-    try {
-        const users = await User.find()
-        res.json(users)
-    } catch (err) {
-        // 500 status means there's something wrong in the server
-        res.status(500).json( {message: err.message })
-    }
+    res.json(res.user)
 })
 
 // Creating a User

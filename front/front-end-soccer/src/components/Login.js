@@ -4,52 +4,70 @@ import axios from 'axios';
 import './Login.css';
 
 function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
+  const [values, setValues] = useState({
+    username: '',
+    password: ''
+  })
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
+  const [valid, setValid] = useState(false)
+  const [error, setError] = useState("")
+  const [user, setUser] = useState({})
+
+  const handleChange = (e) => {
+  setValues({...values, [e.target.name]: e.target.value})};
 
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // Check this information in the RestAPI
-    navigate("/home");
-    console.log(`Submitted username: ${username}, password: ${password}`);
+    getUser(event);
   };
 
   const handleClick = () => {
     navigate("/register");
   };
 
-  // async function postUser(e) {
-  //   e.preventDefault()
+  async function getUser(e) {
+    e.preventDefault()
 
-  //   try {
-  //     await axios.post("", {
-  //       username,
-  //       password
-  //     })
-  //   } catch(err) {
-  //     console.log(err.message)
-  //   }
-  // }
+    const username = values.username
+    const password = values.password
+
+    if(username) {
+    try {
+      await axios.get(`http://localhost:28017/Users/user/${username}`)
+      .then(res => {
+        const u = res.data;
+        console.log(u);
+        if (password === u.password){
+          setUser(u);
+          navigate("/home");
+          console.log(`Passed username: ${username} and password: ${password}`);
+        } else {
+          setValid(true);
+          setError("Incorrect Password");
+        }
+      })
+    } catch(err) {
+      setValid(true);
+      setError("Incorrect Username/Password");
+      console.log(err.message)
+    }
+  }
+}
 
   return (
     <div>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <label>Username:</label>
-          <input type="text" value={username} onChange={handleUsernameChange} />
+          <input type="text" placeholder="Enter Username" value={values.username} name="username" onChange={handleChange} />
         <label>Password:</label>
-          <input type="password" value={password} onChange={handlePasswordChange} />
+          <input type="password" placeholder="Enter Password" value={values.password} name="password" onChange={handleChange} />
         <button type="submit">Log In</button>
+        {valid && <p>{error}</p>}
       </form>
       <div>
         <button onClick={handleClick}>Register</button>
